@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Dickinson Scripts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hamburger for navigation -->
+    <div class="hamburger" aria-label="Open navigation" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Navigation drawer -->
+    <nav class="nav-menu" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog / Journal</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Landing list of screenplays -->
+    <div class="script-list">
+        <!-- Each script item carries data attributes for the cover image and PDF file. -->
+        <div class="script-item" data-cover="images/cover1.jpg" data-pdf="pdfs/script1.pdf">
+            Screenplay 1
+            <span class="arrow"></span>
+        </div>
+        <div class="script-item" data-cover="images/cover2.jpg" data-pdf="pdfs/script2.pdf">
+            Screenplay 2
+            <span class="arrow"></span>
+        </div>
+        <div class="script-item" data-cover="images/cover3.jpg" data-pdf="pdfs/script3.pdf">
+            Screenplay 3
+            <span class="arrow"></span>
+        </div>
+    </div>
+
+    <!-- PDF reader overlay -->
+    <div class="reader-container" aria-live="polite" aria-label="Script reader">
+        <div class="close-btn" aria-label="Close reader"></div>
+        <!-- Use embed to display PDF; fallback to iframe if embed is unsupported. -->
+        <embed type="application/pdf" src="" />
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

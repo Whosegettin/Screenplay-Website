@@ -1,0 +1,201 @@
+/*
+ * Stylesheet for the Tom Dickinson Scripts portfolio site.
+ *
+ * The design follows a minimalist, film‑inspired aesthetic reminiscent of
+ * contemporary art‑house studio landing pages. Dark backgrounds and sparse
+ * typography allow your screenplay titles to take centre stage, while subtle
+ * animations guide the visitor through the experience.
+ */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #0e0e0e;
+    color: #f5f5f5;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease, background-color 0.5s ease;
+}
+
+/* Hamburger menu */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: 30px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Navigation menu */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(14, 14, 14, 0.95);
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 999;
+}
+
+.nav-menu.open {
+    transform: translateX(0);
+}
+
+.nav-menu a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #cccccc;
+}
+
+/* Container for the list of scripts */
+.script-list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    z-index: 10;
+    transition: opacity 0.6s ease;
+}
+
+.script-list.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.script-item {
+    font-size: 2rem;
+    font-weight: 300;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.script-item:hover {
+    color: #eaeaea;
+}
+
+.script-item .arrow {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #f5f5f5;
+    border-right: 2px solid #f5f5f5;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.script-item:hover .arrow {
+    opacity: 1;
+}
+
+/* Reader container for PDF display */
+.reader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.5s ease;
+}
+
+.reader-container.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.reader-container .close-btn {
+    align-self: flex-end;
+    margin: 20px 30px 10px 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+.reader-container .close-btn::before,
+.reader-container .close-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #f5f5f5;
+}
+
+.reader-container .close-btn::before {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.reader-container .close-btn::after {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.reader-container iframe,
+.reader-container embed {
+    width: 100%;
+    height: calc(100% - 60px);
+    border: none;
+    background-color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .script-item {
+        font-size: 1.5rem;
+    }
+    .nav-menu {
+        width: 200px;
+    }
+}
