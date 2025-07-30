@@ -28,7 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Helper to clear background when leaving items
     function resetBackground() {
+        // Restore the original background and remove custom sizing
         body.style.backgroundImage = defaultBg || '';
+        body.style.backgroundSize = '';
+        body.style.backgroundRepeat = '';
+        body.style.backgroundPosition = '';
     }
 
     // Hover behaviour: update background to cover image
@@ -37,12 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('mouseenter', () => {
             if (cover) {
                 body.style.backgroundImage = `url(${cover})`;
+                // When displaying a cover, shrink it to fit on the right side of the screen.
+                // Use a fixed percentage width so the image doesn't overwhelm the page.
+                // A 45% width leaves ample negative space on the left side of the layout,
+                // echoing the inspiration site and preventing the image from feeling too large.
+                body.style.backgroundSize = '45%';
+                body.style.backgroundRepeat = 'no-repeat';
+                body.style.backgroundPosition = 'right center';
             }
         });
-        item.addEventListener('mouseleave', () => {
-            // Revert to default background
-            resetBackground();
-        });
+        // Do not reset the background on mouseleave; the last hovered cover
+        // remains visible until another item is hovered.
         // Click to open PDF
         item.addEventListener('click', (e) => {
             e.preventDefault();

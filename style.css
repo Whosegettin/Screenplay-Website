@@ -97,8 +97,12 @@ body {
  * left offset to control the horizontal margin.
  */
 .script-list {
+    /* Position the script titles near the lower left of the viewport. A small
+     * bottom offset places the list close to the bottom edge, similar to
+     * the reference A24 layout. Adjust the left offset to tune the
+     * horizontal margin. */
     position: fixed;
-    bottom: 20%;
+    bottom: 5%;
     left: 5%;
     display: flex;
     flex-direction: column;
@@ -178,12 +182,15 @@ body {
 }
 
 .reader-container .close-btn {
-    align-self: flex-end;
-    margin: 20px 30px 10px 0;
-    width: 30px;
-    height: 30px;
+    /* Absolutely position the close button in the top right corner of the reader.
+     * This makes it consistently visible regardless of the flex layout of
+     * the container. The enlarged size improves tap targets on mobile. */
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    position: relative;
 }
 
 .reader-container .close-btn::before,
