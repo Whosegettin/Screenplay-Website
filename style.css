@@ -90,14 +90,20 @@ body {
  * separates each item for legibility. When the reader opens a script the
  * list fades out gracefully.
  */
+/*
+ * Script list positioning: anchored near the lower left of the screen. Using a
+ * percentage for the bottom offset allows the list to sit higher up on
+ * taller screens, mimicking the A24 landing page layout. Adjust the
+ * left offset to control the horizontal margin.
+ */
 .script-list {
     position: fixed;
-    bottom: 60px;
-    left: 40px;
+    bottom: 20%;
+    left: 5%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.2rem;
+    gap: 1.5rem;
     z-index: 10;
     transition: opacity 0.6s ease;
 }
@@ -115,13 +121,13 @@ body {
 }
 
 .script-item .title {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 300;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 .script-item .meta {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 200;
     color: #b5b5b5;
     margin-top: 0.1rem;
@@ -213,7 +219,7 @@ body {
         font-size: 1.4rem;
     }
     .script-item .meta {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
     .nav-menu {
         width: 200px;
