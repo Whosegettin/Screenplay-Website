@@ -13,8 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const scriptList = document.querySelector('.script-list');
     const items = document.querySelectorAll('.script-item');
     const readerContainer = document.querySelector('.reader-container');
-    const pdfFrame = readerContainer.querySelector('iframe, embed');
-    const closeBtn = readerContainer.querySelector('.close-btn');
+    // Guard against pages that do not define a reader container (e.g. About/Contact).
+    let pdfFrame = null;
+    let closeBtn = null;
+    if (readerContainer) {
+        pdfFrame = readerContainer.querySelector('iframe, embed');
+        closeBtn = readerContainer.querySelector('.close-btn');
+    }
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -49,12 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Open the PDF reader
     function openReader(src) {
+        // If there is no reader container (on secondary pages), do nothing
+        if (!readerContainer || !pdfFrame) return;
         // Hide script list via fade if present
         if (scriptList) {
             scriptList.classList.add('fade-out');
         }
         // Set PDF source
-        if (pdfFrame.tagName.toLowerCase() === 'iframe' || pdfFrame.tagName.toLowerCase() === 'embed') {
+        const tag = pdfFrame.tagName ? pdfFrame.tagName.toLowerCase() : '';
+        if (tag === 'iframe' || tag === 'embed') {
             pdfFrame.src = src;
         }
         // Show reader after a slight delay to allow fade
@@ -67,9 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close the PDF reader
     function closeReader() {
+        if (!readerContainer || !pdfFrame) return;
         readerContainer.classList.remove('active');
         // Clear PDF src to free resources
-        if (pdfFrame.tagName.toLowerCase() === 'iframe' || pdfFrame.tagName.toLowerCase() === 'embed') {
+        const tag = pdfFrame.tagName ? pdfFrame.tagName.toLowerCase() : '';
+        if (tag === 'iframe' || tag === 'embed') {
             pdfFrame.src = '';
         }
         // Show list again after fade
@@ -82,15 +92,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 300);
     }
 
-    closeBtn.addEventListener('click', closeReader);
-
-    // Clicking anywhere outside the PDF frame will also close
-    readerContainer.addEventListener('click', function (e) {
-        // Only close if the click target is the container itself (not the PDF)
-        if (e.target === readerContainer) {
-            closeReader();
-        }
-    });
+    // Bind close behaviour only if the reader is present
+    if (closeBtn && readerContainer) {
+        closeBtn.addEventListener('click', closeReader);
+        // Clicking anywhere outside the PDF frame will also close
+        readerContainer.addEventListener('click', function (e) {
+            // Only close if the click target is the container itself (not the PDF)
+            if (e.target === readerContainer) {
+                closeReader();
+            }
+        });
+    }
 
     // Toggle navigation drawer
     hamburger.addEventListener('click', function () {
